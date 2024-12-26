@@ -31,12 +31,6 @@ def communicate():
 
     st.session_state["user_input"] = ""  # 入力欄を消去
 
-# Rustを使わない
-from transformers import pipeline
-
-# Use without tokenizers
-model = pipeline('text-classification', use_fast=False)
-
 # ユーザーインターフェイスの構築
 st.title("AI Coach SHIGERU")
 st.write("グレゴリー・ベイトソンの教育モデルに基づいて、ChatGPTによる”メタ認知”を提供するサービスです")
