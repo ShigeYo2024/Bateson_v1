@@ -34,9 +34,9 @@ def communicate():
 
 # ユーザーインターフェイスの構築
 st.title("AI Coach SHIGERU")
-st.write("グレゴリー・ベイトソンの教育モデルに基づいて、ChatGPTによるコーチングを提供するサービスです")
+st.write("グレゴリー・ベイトソンの教育モデルに基づいて、ChatGPTによる”メタ認知”を提供するサービスです")
 
-user_input = st.text_input("どんな人生を過ごしたいのか、是非教えてください。", key="user_input", on_change=communicate)
+user_input = st.text_input("どんなことを学びたいのか、是非教えてください。", key="user_input", on_change=communicate)
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
