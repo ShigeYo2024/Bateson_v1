@@ -48,6 +48,8 @@ if st.session_state["messages"]:
 
         st.write(speaker + ": " + message["content"])
 
+
+#  履歴の保存を可能にする
 import json
 
 # 保存機能
@@ -68,26 +70,12 @@ def load_history():
 # 起動時に履歴をロード
 if "messages" not in st.session_state:
     load_history()
-
-# セッション終了時に保存
+# セッション時に保存
 if st.button("終了して履歴を保存"):
     save_history()
     st.success("履歴を保存しました。")
 
-# UI追加　感じを変えてランダム性を持たせる
-
-# モデル選択と温度調整
-model = st.selectbox("モデルを選択", ["gpt-4o-mini", "gpt-3.5-turbo"])
-temperature = st.slider("ランダム性 (Temperature)", 0.0, 1.0, 0.7)
-
-# communicate関数でモデルと温度を使用
-response = openai.ChatCompletion.create(
-    model=model,
-    messages=messages,
-    temperature=temperature
-)
-
-# プログラムのエラーハンドリング
+# エラーハンドリング
 def communicate():
     messages = st.session_state["messages"]
     
@@ -111,7 +99,7 @@ def communicate():
 
     st.session_state["user_input"] = ""
 
-# 分析と学習サマリーの提供
+# 分析関数の追加
 def analyze_messages():
     levels = {"zero_learning": 0, "first_learning": 0, "second_learning": 0, "third_learning": 0}
     for msg in st.session_state["messages"]:
@@ -130,4 +118,3 @@ def analyze_messages():
 if st.button("対話のサマリーを見る"):
     analysis = analyze_messages()
     st.write("学習レベルごとのやり取り数:", analysis)
-
